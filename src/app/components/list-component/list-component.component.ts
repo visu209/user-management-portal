@@ -17,7 +17,7 @@ export class ListComponentComponent implements OnInit {
 
   users: User[];
   dataSource: MatTableDataSource<User>;
-  displayedColumns: string[] = ['id', 'username', 'name', 'email'];
+  displayedColumns: string[] = ['id', 'username', 'name', 'email', 'action'];
 
   constructor(private userService: UserService) { }
 
