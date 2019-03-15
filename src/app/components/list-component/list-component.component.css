@@ -1,19 +1,8 @@
 /* Structure */
 
-.mat-table-container {
-display: flex;
-flex-direction: column;
-min-width: 300px;
-}
-
-/* table {
+table {
   width: 100%;
 }
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-} */
 
 mat-cell{
   display:flex !important;
@@ -24,11 +13,15 @@ mat-cell{
 mat-header-cell {
   display:flex;
   justify-content:center;
+  text-align: center;
 }
-
 
 .mat-input-container {
   min-height: 64px;
   padding: 8px 24px 0;
-  
 }
+
+/* .mat-form-field {
+  font-size: 14px;
+  width: 100%;
+} */
