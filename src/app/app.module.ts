@@ -14,14 +14,18 @@ import { CreateComponentComponent } from './components/create-component/create-c
 import { EditComponentComponent } from './components/edit-component/edit-component.component';
 import { LoginComponent } from './components/admin/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
+import { AngularFirestore } from '@angular/fire/firestore';
 
-var config = {
-  apiKey: "AIzaSyA5oNSiXHponAehCBRrAp1KWnpYF3jXB64",
-  authDomain: "user-portal-6c2a2.firebaseapp.com",
-  databaseURL: "https://user-portal-6c2a2.firebaseio.com",
-  projectId: "user-portal-6c2a2",
-  storageBucket: "user-portal-6c2a2.appspot.com",
-  messagingSenderId: "853240610951"
+export const environment = {
+  production: false,
+  config: {
+    apiKey: "AIzaSyA5oNSiXHponAehCBRrAp1KWnpYF3jXB64",
+    authDomain: "user-portal-6c2a2.firebaseapp.com",
+    databaseURL: "https://user-portal-6c2a2.firebaseio.com",
+    projectId: "user-portal-6c2a2",
+    storageBucket: "user-portal-6c2a2.appspot.com",
+    messagingSenderId: "853240610951"
+  }
 }
 
 @NgModule({
@@ -39,11 +43,13 @@ var config = {
     HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(config),
+    AngularFireModule.initializeApp(environment.config),
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [
+    AngularFirestore
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

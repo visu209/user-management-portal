@@ -11,12 +11,15 @@ export class UserService {
 
   usersUrl:string = 'http://localhost:3000/users';
 
+  formData: User;
+
   constructor(private http: HttpClient, private angularFirestore: AngularFirestore) { }
 
   getUsers():Observable<User[]>{
     return this.http.get<User[]>(this.usersUrl);
   }
 
+  //service to fetch all the users
   getAllUsers(){
     return this.angularFirestore.collection('users').snapshotChanges();
   }

@@ -22,10 +22,21 @@ export class ListComponentComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(users => {
-      this.users = users;
+    // this.userService.getUsers().subscribe(users => {
+    //   this.users = users;
+    //   this.dataSource = new MatTableDataSource(this.users)
+    // });
+
+    this.userService.getAllUsers().subscribe(data => {
+      this.users = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as User;
+      })
       this.dataSource = new MatTableDataSource(this.users)
     });
+
    }
 
    applyFilter(filterValue: string){
