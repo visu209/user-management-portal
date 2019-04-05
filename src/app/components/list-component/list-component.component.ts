@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/User';
 import { UserService } from '../../services/user.service';
 import { MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-component',
@@ -14,7 +15,7 @@ export class ListComponentComponent implements OnInit {
   dataSource: MatTableDataSource<User>;
   displayedColumns: string[] = ['id', 'username', 'name', 'email', 'action'];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, public router: Router) { }
 
   ngOnInit() {
    
@@ -32,6 +33,11 @@ export class ListComponentComponent implements OnInit {
 
    applyFilter(filterValue: string){
      this.dataSource.filter = filterValue.trim().toLowerCase();
+   }
+
+   onEdit(id: number){
+      console.log("edit botton trigerred");
+      this.router.navigate(['/edit']);
    }
 
 }

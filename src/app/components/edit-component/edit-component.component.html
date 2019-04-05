@@ -1,3 +1,17 @@
-<p>
-  edit-component works!
-</p>
+<div class="example-container">
+  <mat-form-field>
+    <input matInput #input placeholder="Name">
+    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+  </mat-form-field>
+  <mat-form-field hintLabel="Max 10 characters">
+    <input matInput #input maxlength="10" placeholder="Username">
+    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+  </mat-form-field>
+  <mat-form-field hintLabel="Max 10 characters">
+    <input matInput #input maxlength="10" placeholder="Email">
+  </mat-form-field>
+  <br>
+  <div class="example-button-row">
+    <button mat-flat-button color="primary">Primary</button>
+  </div>
+</div>
