@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class ListComponentComponent implements OnInit {
 
   users: User[];
+  user = new User();
+
   dataSource: MatTableDataSource<User>;
   displayedColumns: string[] = ['id', 'username', 'name', 'email', 'action'];
 
@@ -35,9 +37,16 @@ export class ListComponentComponent implements OnInit {
      this.dataSource.filter = filterValue.trim().toLowerCase();
    }
 
-   onEdit(id: number){
-      console.log("edit botton trigerred");
-      this.router.navigate(['/edit']);
+   onEdit(user: User){
+      console.log(JSON.stringify(user));
+      this.user.id = user.id;
+      this.user.name = user.name;
+      this.user.username = user.username;
+      this.user.email = user.email;
    }
+
+   onSubmit() {
+    this.userService.createUser(this.user);
+  }
 
 }

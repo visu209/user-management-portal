@@ -29,12 +29,12 @@ export class UserService {
 
   //service to create a new user
   createUser(user: User){
-    return this.angularFirestore.collection('users').add({
-      id: this.angularFirestore.createId,
-      name: user.name,
-      username: user.username,
-      email: user.email
-    });
+    let record = {};
+    record['id'] = user.id;
+    record['name'] = user.name;
+    record['username'] = user.username;
+    record['email'] = user.email
+    return this.angularFirestore.collection('users').add(record);
   }
 
   updateUser(user: User){

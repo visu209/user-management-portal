@@ -21,7 +21,16 @@ mat-header-cell {
   padding: 8px 24px 0;
 }
 
-/* .mat-form-field {
-  font-size: 14px;
+.create-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-container > * {
   width: 100%;
-} */
+}
+
+.create-button-row button,
+.create-button-row a {
+margin-right: 8px;
+}
