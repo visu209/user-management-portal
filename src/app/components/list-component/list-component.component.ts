@@ -15,7 +15,9 @@ export class ListComponentComponent implements OnInit {
   user = new User();
 
   dataSource: MatTableDataSource<User>;
-  displayedColumns: string[] = ['id', 'username', 'name', 'email', 'action'];
+
+  //this determines the order in UI irrespective of the order in html file
+  displayedColumns: string[] = ['name', 'username', 'email', 'action'];
 
   constructor(private userService: UserService, public router: Router) { }
 
@@ -28,7 +30,8 @@ export class ListComponentComponent implements OnInit {
           ...e.payload.doc.data()
         } as User;
       })
-      this.dataSource = new MatTableDataSource(this.users)
+      this.user.isEdit = false;
+      this.dataSource = new MatTableDataSource(this.users);
     });
 
    }
@@ -37,16 +40,34 @@ export class ListComponentComponent implements OnInit {
      this.dataSource.filter = filterValue.trim().toLowerCase();
    }
 
+   onSubmit() {
+    if(this.user.isEdit){
+      this.userService.updateUser(this.user);
+      this.user.isEdit = false;
+    }
+    else{
+      this.userService.createUser(this.user);
+    }
+  }
+
    onEdit(user: User){
-      console.log(JSON.stringify(user));
       this.user.id = user.id;
       this.user.name = user.name;
       this.user.username = user.username;
       this.user.email = user.email;
+      this.user.isEdit = true;
    }
 
-   onSubmit() {
-    this.userService.createUser(this.user);
-  }
+   onDelete(userId: string){
+      console.log(userId);
+      this.userService.deleteUser(userId);
+   }
 
+   clear(){
+    this.user.id = '';
+    this.user.name = '';
+    this.user.username = '';
+    this.user.email = '';
+    this.user.isEdit = false;
+   }
 }

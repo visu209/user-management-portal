@@ -29,17 +29,26 @@ export class UserService {
 
   //service to create a new user
   createUser(user: User){
-    let record = {};
-    record['id'] = user.id;
-    record['name'] = user.name;
-    record['username'] = user.username;
-    record['email'] = user.email
-    return this.angularFirestore.collection('users').add(record);
+    console.log(JSON.stringify(user));
+    return this.angularFirestore.collection('users').add({
+      email: user.email,
+      name: user.name,
+      username: user.username
+    });
   }
 
+  //service to update an existing user
   updateUser(user: User){
-    delete user.id;
-    this.angularFirestore.doc('users/' + user.id).update(user);
+    this.angularFirestore.doc('users/' + user.id).update({
+      email: user.email,
+      name: user.name,
+      username: user.username
+    });
+  }
+
+  //service to delete a user
+  deleteUser(userId: string){
+    this.angularFirestore.doc('users/' + userId).delete();
   }
 
 }
