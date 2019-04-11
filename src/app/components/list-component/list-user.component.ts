@@ -6,10 +6,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-component',
-  templateUrl: './list-component.component.html',
-  styleUrls: ['./list-component.component.css']
+  templateUrl: './list-user.component.html',
+  styleUrls: ['./list-user.component.css']
 })
-export class ListComponentComponent implements OnInit {
+export class ListUserComponent implements OnInit {
 
   users: User[];
   user = new User();

@@ -9,7 +9,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { AppComponent } from './app.component';
-import { ListComponentComponent } from './components/list-component/list-component.component';
+import { ListUserComponent } from './components/list-component/list-user.component';
 import { LoginComponent } from './components/admin/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -29,7 +29,7 @@ export const environment = {
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponentComponent,
+    ListUserComponent,
     LoginComponent,
     HeaderComponent
   ],
