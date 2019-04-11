@@ -2,12 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module'
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-
 import { AppComponent } from './app.component';
 import { ListUserComponent } from './components/list-component/list-user.component';
 import { LoginComponent } from './components/admin/login/login.component';
@@ -38,7 +36,6 @@ export const environment = {
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
-    BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.config),
     AngularFireAuthModule,
     AngularFireDatabaseModule
