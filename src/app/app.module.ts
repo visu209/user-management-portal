@@ -10,8 +10,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { AppComponent } from './app.component';
 import { ListComponentComponent } from './components/list-component/list-component.component';
-import { CreateComponentComponent } from './components/create-component/create-component.component';
-import { EditComponentComponent } from './components/edit-component/edit-component.component';
 import { LoginComponent } from './components/admin/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -32,8 +30,6 @@ export const environment = {
   declarations: [
     AppComponent,
     ListComponentComponent,
-    CreateComponentComponent,
-    EditComponentComponent,
     LoginComponent,
     HeaderComponent
   ],
