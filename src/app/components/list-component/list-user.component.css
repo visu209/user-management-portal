@@ -1,5 +1,4 @@
 /* Structure */
-
 table {
   width: 100%;
 }
@@ -30,7 +29,6 @@ mat-header-cell {
   width: 100%;
 }
 
-.create-button-row button,
-.create-button-row a {
+.create-button-row button{
 margin-right: 8px;
 }

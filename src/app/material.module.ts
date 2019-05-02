@@ -6,9 +6,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material';
 
 @NgModule({
   imports: [
+    MatButtonModule,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
@@ -18,6 +20,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   exports: [
+    MatButtonModule,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
