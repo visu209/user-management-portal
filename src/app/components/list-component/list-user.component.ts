@@ -39,6 +39,9 @@ export class ListUserComponent implements OnInit {
       this.user.isEdit = false;
       this.dataSource = new MatTableDataSource(this.users);
       this.dataSource.paginator = this.paginator;
+    },
+    error => {
+      console.log(error);
     });
   }
 
@@ -70,14 +73,19 @@ export class ListUserComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  async onSubmit() {
+  onSubmit() {
     if (this.user.isEdit) {
-      await this.userService.updateUser(this.user).subscribe();
+      this.userService.updateUser(this.user).subscribe( response => {
+        console.log(response);
+        this.loadAllUsers();
+      },
+      error => {
+        console.log(error);
+      });
       this.user.isEdit = false;
-      this.loadAllUsers();
     }
     else {
-      await this.userService.createUser(this.user);
+      this.userService.createUser(this.user);
       this.loadAllUsers();
     }
   }
@@ -91,10 +99,14 @@ export class ListUserComponent implements OnInit {
   }
 
   onDelete(userId: string) {
-    console.log(userId);
-    this.userService.deleteUser(userId).subscribe(result => {
-      this.router.navigate(['/list']);
-    }, error => console.error(error));
+    this.userService.deleteUser(userId).subscribe(
+      response => {
+        console.log(response);
+        this.loadAllUsers();
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   clear() {

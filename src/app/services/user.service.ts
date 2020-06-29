@@ -14,7 +14,7 @@ export class UserService {
 
   formData: User;
 
-  constructor(private http: HttpClient, private router: Router, private angularFirestore: AngularFirestore) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   //service to fetch all the users
   getAllUsers(): Observable<User[]> {
