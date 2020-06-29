@@ -25,24 +25,28 @@ export class ListUserComponent implements OnInit {
 
   selection = new SelectionModel<User>(true, []);
 
-  isDeleteEnabled: Boolean = this.selection.selected.length > 0 ? true : false;
-
   constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.loadAllUsers();
   }
 
-  loadAllUsers(){
+  isBulkDeleteDisabled(){
+    console.log(this.selection.selected.length);
+    return this.selection.selected.length > 0 ? false : true;
+  }
+
+  /** load all users **/
+  loadAllUsers() {
     this.userService.getAllUsers().subscribe(data => {
       this.users = data;
       this.user.isEdit = false;
       this.dataSource = new MatTableDataSource(this.users);
       this.dataSource.paginator = this.paginator;
     },
-    error => {
-      console.log(error);
-    });
+      error => {
+        console.log(error);
+      });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -59,45 +63,56 @@ export class ListUserComponent implements OnInit {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
+  /** delete selected users **/
   deleteSelected() {
-    this.selection.selected.forEach(async item => {
+    this.selection.selected.forEach(item => {
       let user: User = this.users.find(d => d === item);
-      await this.userService.deleteUser(user.id).subscribe();
+      this.userService.deleteUser(user.id).subscribe(
+        response => {
+          console.log(response);
+          this.loadAllUsers();
+        },
+        error => {
+          console.log(error);
+        });
       // this.users.splice(index,1)
       // this.dataSource = new MatTableDataSource<User>(this.users);
     });
-    this.loadAllUsers();
   }
 
+  /** apply search filter to datatable **/
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  /** create and edit user **/
   onSubmit() {
     if (this.user.isEdit) {
-      this.userService.updateUser(this.user).subscribe( response => {
-        console.log(response);
-        this.loadAllUsers();
-      },
-      error => {
-        console.log(error);
-      });
+      this.userService.updateUser(this.user).subscribe(
+        response => {
+          console.log(response);
+          this.loadAllUsers();
+        },
+        error => {
+          console.log(error);
+        });
       this.user.isEdit = false;
     }
     else {
-      this.userService.createUser(this.user);
-      this.loadAllUsers();
+      this.userService.createUser(this.user).subscribe(
+        response => {
+          console.log(response);
+          this.clear();
+          this.loadAllUsers();
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
   }
 
-  onEdit(user: User) {
-    this.user.id = user.id;
-    this.user.name = user.name;
-    this.user.username = user.username;
-    this.user.email = user.email;
-    this.user.isEdit = true;
-  }
-
+  /** delete the user **/
   onDelete(userId: string) {
     this.userService.deleteUser(userId).subscribe(
       response => {
@@ -109,6 +124,16 @@ export class ListUserComponent implements OnInit {
       });
   }
 
+  /** set the edit user to the edit form **/
+  onEdit(user: User) {
+    this.user.id = user.id;
+    this.user.name = user.name;
+    this.user.username = user.username;
+    this.user.email = user.email;
+    this.user.isEdit = true;
+  }
+
+  /** reset the edit form container after edit and create **/
   clear() {
     this.user.id = '';
     this.user.name = '';

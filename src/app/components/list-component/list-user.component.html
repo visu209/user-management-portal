@@ -1,11 +1,9 @@
 <div class="create-container">
     <mat-form-field>
         <input matInput #input [(ngModel)]="user.name" placeholder="Name">
-        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
     </mat-form-field>
     <mat-form-field hintLabel="Max 10 characters">
         <input matInput #input [(ngModel)]="user.username" maxlength="10" placeholder="Username">
-        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
     </mat-form-field>
     <mat-form-field hintLabel="Max 50 characters">
         <input matInput #input [(ngModel)]="user.email" maxlength="50" placeholder="Email">
@@ -22,7 +20,7 @@
         <mat-form-field>
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
-        <button mat-icon-button class="bulk-delete" color="accent" (click)="deleteSelected()">
+        <button mat-icon-button [disabled]="isBulkDeleteDisabled()" class="bulk-delete" color="accent" (click)="deleteSelected()" disab>
             <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
     </div>

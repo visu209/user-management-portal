@@ -5,9 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../models/User';
 import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class UserService {
 
   serviceUrl: string = 'http://localhost:8090/';
@@ -27,16 +25,7 @@ export class UserService {
       email: user.email,
       name: user.name,
       username: user.username
-    }).subscribe(
-      (val) => {
-        console.log("POST call successful value returned in body", val);
-      },
-      response => {
-        console.log("POST call in error", response);
-      },
-      () => {
-        console.log("The POST observable is now completed.");
-      });
+    });
   }
 
   //service to update an existing user
