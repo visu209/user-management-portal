@@ -3,16 +3,20 @@ table {
   width: 100%;
 }
 
-mat-cell{
-  display:flex !important;
-  justify-content:center!important;
-  
+.mat-table-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
 }
 
-mat-header-cell {
-  display:flex;
-  justify-content:center;
-  text-align: center;
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.checkbox {
+  margin-top: 25px;
 }
 
 .mat-input-container {
@@ -31,4 +35,8 @@ mat-header-cell {
 
 .create-button-row button{
 margin-right: 8px;
+}
+
+.bulk-delete{
+  float: right;
 }

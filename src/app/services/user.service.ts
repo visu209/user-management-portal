@@ -10,45 +10,49 @@ import { Router } from '@angular/router';
 })
 export class UserService {
 
-  //json-server url
-  usersUrl:string = 'http://localhost:3000/users';
+  serviceUrl: string = 'http://localhost:8090/';
 
   formData: User;
 
-  constructor(private http: HttpClient, private angularFirestore: AngularFirestore, private router: Router) { }
-
-  //earlier implementation of get with JSONServer
-  getUsers():Observable<User[]>{
-    return this.http.get<User[]>(this.usersUrl);
-  }
+  constructor(private http: HttpClient, private router: Router, private angularFirestore: AngularFirestore) { }
 
   //service to fetch all the users
-  getAllUsers(){
-    return this.angularFirestore.collection('users').snapshotChanges();
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.serviceUrl + 'users');
   }
 
   //service to create a new user
-  createUser(user: User){
-    console.log(JSON.stringify(user));
-    return this.angularFirestore.collection('users').add({
+  public createUser(user: User) {
+    return this.http.post<any>(this.serviceUrl + 'user', {
       email: user.email,
       name: user.name,
       username: user.username
-    });
+    }).subscribe(
+      (val) => {
+        console.log("POST call successful value returned in body", val);
+      },
+      response => {
+        console.log("POST call in error", response);
+      },
+      () => {
+        console.log("The POST observable is now completed.");
+      });
   }
 
   //service to update an existing user
-  updateUser(user: User){
-    this.angularFirestore.doc('users/' + user.id).update({
+  updateUser(user: User) {
+    return this.http.put<User>(this.serviceUrl + 'users', [{
+      id: user.id,
       email: user.email,
       name: user.name,
       username: user.username
-    });
+    }]);
   }
 
   //service to delete a user
-  deleteUser(userId: string){
-    this.angularFirestore.doc('users/' + userId).delete();
+  deleteUser(userId: string) {
+    const url = `${this.serviceUrl}user/${userId}`;
+    return this.http.delete<User>(url);
   }
 
 }

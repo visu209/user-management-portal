@@ -20,7 +20,8 @@ export const environment = {
     databaseURL: "https://user-portal-6c2a2.firebaseio.com",
     projectId: "user-portal-6c2a2",
     storageBucket: "user-portal-6c2a2.appspot.com",
-    messagingSenderId: "853240610951"
+    messagingSenderId: "853240610951",
+    appId: "1:853240610951:web:631dd9795613d34acaf822"
   }
 }
 
